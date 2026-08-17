@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "zeocore-example-metrics-tracker"
+version = "0.1.0"
+description = "zeocore-powered rebuild of business-transformation-tracker: weekly self-reported metrics tracking, with real pydantic validation against the original's real bug class"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "zeocore>=0.1.0",
+    "duckdb>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/metrics_tracker"]
