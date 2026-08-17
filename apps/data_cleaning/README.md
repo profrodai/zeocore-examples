@@ -8,7 +8,7 @@ what this whole repo is and why it exists.
 
 ## What's here
 
-Five real, runnable `BaseZeoTool` subclasses in `src/data_cleaning/`:
+Six real, runnable `BaseZeoTool` subclasses in `src/data_cleaning/`:
 
 - **`pipeline_tools.py`** — the two main pipelines, matching the original's
   own `scripts/clean_contacts.py` and `scripts/clean_accounts.py`:
@@ -20,6 +20,17 @@ Five real, runnable `BaseZeoTool` subclasses in `src/data_cleaning/`:
   functions, each wrapped as its own tiny typed tool (the "many small typed
   tools" shape zeocore's own README pitches):
   - `CleanEmailTool`, `NormalizeCountryTool`, `ExtractDomainTool`.
+- **`drive_tools.py`** — **round 2's real integration-backed capability**
+  (RULING-280 / CHARTER-03): `DownloadFromDriveTool` downloads a real file
+  from Google Drive via zeocore's real
+  `zeo_core.integrations.google.drive.GoogleDriveService` (a real OAuth
+  flow, not mocked), returning a local path that feeds straight into
+  `CleanContactsTool`/`CleanAccountsTool` unchanged. If no `google_drive`
+  service is wired into `ctx.services`, it returns a typed
+  `CapabilityResult.skip` — not an error — so the zero-credential path
+  never breaks. See the repo-root `SETUP.md` for the real Google Cloud
+  OAuth walkthrough, and `run_demo_drive.py` (this directory) for the
+  runnable end-to-end example.
 - **`_utils.py`** — the plain-Python cleaning helpers themselves, ported
   near-verbatim from the original's `scripts/utils.py` (same repo, MIT
   licensed, linked above) — this module is the business-logic ring; the tool
@@ -51,7 +62,12 @@ invalid-email rows filtered, duplicates removed, final row count).
 
 ## What a real (non-dummy) run would need
 
-Nothing extra for the CSV-in/CSV-out path used here. The original
+**For the cleaning pipelines themselves**: nothing extra. The original
 `agency-data-onboarding-kit` also has a Postgres/Supabase storage layer this
 rebuild does not (yet) reach — see the repo-level `.env.example` for the
 placeholder that a future round adding that layer would fill in.
+
+**For `DownloadFromDriveTool` (round 2's real integration)**: real Google
+OAuth credentials — see the repo-root `SETUP.md` for the full walkthrough,
+and `run_demo_drive.py` for the runnable demo. This is entirely optional;
+`run_demo.py` above needs none of it.

@@ -68,7 +68,7 @@ class CleanContactsTool(BaseZeoTool):
         except Exception as e:  # noqa: BLE001 -- mirrors the original's own broad read-error handling, now returned as a typed failure instead of sys.exit
             return CapabilityResult.fail_from_exc(
                 msg=f"Could not read input CSV: {request.input_path}",
-                code="DC_IO_READ_FAILED",
+                code="QC_IO_READ_FAILED",
                 exc=e,
             )
 
@@ -91,7 +91,7 @@ class CleanContactsTool(BaseZeoTool):
             if not found:
                 return CapabilityResult.fail(
                     msg="No email column found in input CSV",
-                    code="DC_VAL_NO_EMAIL_COLUMN",
+                    code="QC_VAL_NO_EMAIL_COLUMN",
                 )
 
         df = df.with_columns(
@@ -179,7 +179,7 @@ class CleanContactsTool(BaseZeoTool):
         except Exception as e:  # noqa: BLE001 -- mirrors the original's own broad write-error handling
             return CapabilityResult.fail_from_exc(
                 msg=f"Could not write output CSV: {request.output_path}",
-                code="DC_IO_WRITE_FAILED",
+                code="QC_IO_WRITE_FAILED",
                 exc=e,
             )
 
@@ -232,7 +232,7 @@ class CleanAccountsTool(BaseZeoTool):
         except Exception as e:  # noqa: BLE001 -- mirrors the original's own broad read-error handling
             return CapabilityResult.fail_from_exc(
                 msg=f"Could not read input CSV: {request.input_path}",
-                code="DC_IO_READ_FAILED",
+                code="QC_IO_READ_FAILED",
                 exc=e,
             )
 
@@ -250,7 +250,7 @@ class CleanAccountsTool(BaseZeoTool):
         if name_col is None:
             return CapabilityResult.fail(
                 msg="Could not find company name column in input CSV",
-                code="DC_VAL_NO_NAME_COLUMN",
+                code="QC_VAL_NO_NAME_COLUMN",
             )
         if name_col != "name":
             df = df.rename({name_col: "name"})
@@ -354,7 +354,7 @@ class CleanAccountsTool(BaseZeoTool):
         except Exception as e:  # noqa: BLE001 -- mirrors the original's own broad write-error handling
             return CapabilityResult.fail_from_exc(
                 msg=f"Could not write output CSV: {request.output_path}",
-                code="DC_IO_WRITE_FAILED",
+                code="QC_IO_WRITE_FAILED",
                 exc=e,
             )
 
