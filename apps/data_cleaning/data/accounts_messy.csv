@@ -1,0 +1,15 @@
+Company Name ,Website,Industry,Employee Count,Country ,Status
+NORTHWIND DEMO CO,https://www.northwind-demo.test/about-us,Software,180,USA,customer
+northwind demo co,northwind-demo.test,SaaS,180,United States,prospect
+BrightLoop Analytics Demo,http://brightloop-demo.test,Technology,60,UK,prospect
+brightloop analytics demo,https://www.brightloop-demo.test/,Tech,60,United Kingdom,active
+"Harbor Edge Consulting Demo, LLC",www.harboredge-demo.test,Consulting,900,GB,customer
+PixelForge Studio Demo,https://pixelforge-demo.test,Design Agency,14,U.K.,prospect
+QuantaMeadow AI Demo,QUANTAMEADOW-DEMO.TEST,AI & ML,95,USA,customer
+Vertex Cloud Demo,https://vertexcloud-demo.test,Cloud Infrastructure,320,ES,prospect
+Savanna Labs Demo,,Fintech,25,NG,prospect
+Torii Delta Systems Demo,https://www.toridelta-demo.test/en,Manufacturing,540,JP,customer
+,https://noname-demo.test,Unknown,10,USA,prospect
+GreenRidge Partners Demo,www.greenridge-demo.test,Consulting,75,DE,active
+DuneWorks Digital Demo,duneworks-demo.test,Marketing,8,AE,prospect
+LimeAxis Media Demo,https://limeaxis-demo.test/company,Media,42,IT,customer
