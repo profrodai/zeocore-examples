@@ -96,7 +96,7 @@ def main() -> None:
         fetch_result = FetchDocTextTool().run(
             FetchDocTextRequest(document_id=ILLUSTRATIVE_DOCUMENT_ID), ctx
         )
-        print(f"status={fetch_result.status}  msg={fetch_result.human_message}")
+        print(f"status={fetch_result.status.value}  msg={fetch_result.human_message}")
         print()
 
         print("=" * 70)
@@ -125,7 +125,7 @@ def main() -> None:
             ),
             ctx,
         )
-        print(f"status={post_result.status}  msg={post_result.human_message}")
+        print(f"status={post_result.status.value}  msg={post_result.human_message}")
         print()
 
         print("=" * 70)
