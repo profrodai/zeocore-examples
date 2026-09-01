@@ -157,10 +157,34 @@ Constructing the integrations against real credentials is the **operator's own
 act**, deliberately not this demo's default path:
 
 ```python
-docs = GoogleDocsService(client_secrets_file=..., credentials_file=...)
 bluesky = BlueskyIntegration()   # reads BLUESKY_* from the environment
-docs.initialize()
 bluesky.initialize()
+```
+
+**`BlueskyIntegration()` needs no config file** — it reads
+`BLUESKY_IDENTIFIER`/`BLUESKY_APP_PASSWORD`/`BLUESKY_SERVICE_URL` straight
+from the environment (see "Credentials" above).
+
+**`GoogleDocsService` is less direct — confirmed by execution, not assumed
+from the constructor signature.** Passing `client_secrets_file=`/
+`credentials_file=` to `GoogleDocsService(...)` does **not** skip its
+default-locations config check the way it might look like it should:
+`GoogleDocsService(client_secrets_file="...", credentials_file="...")
+.initialize()` still returns the same `"Configuration file not found in
+default locations."` error as the zero-argument form — verified live,
+reproduced twice. `BaseIntegrationService.initialize()` runs its own
+config-file lookup before a subclass's constructor args are ever consulted.
+Making this actually authenticate needs a real YAML config file (via
+`config_path=`) shaped for `GoogleDocsConfig` (`client_secrets_file` /
+`credentials_file` keys) — the exact shape was not pinned down further here,
+on purpose: this repo never calls the live Google API, and guessing past
+what was verified would trade one honest gap for a fabricated instruction.
+Treat the constructor snippet above as unresolved for Docs; check zeocore's
+own docs or source (`zeo_core/integrations/google/docs/service.py`,
+`zeo_core/integrations/core/base.py`) before building a real Docs
+integration against it.
+
+```python
 ctx = ToolContext(services={"google_docs": docs, "bluesky": bluesky})
 ```
 
